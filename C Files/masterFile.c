@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 
-#include "D:\PROJECT_SEM1\cryptography\C Files\encrypt.h"
-#include "D:\PROJECT_SEM1\cryptography\C Files\decrypt.h"
+#include "encrypt.h"
+#include "decrypt.h"
 
 
 int main(int argc, char** argv) {

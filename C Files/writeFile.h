@@ -16,13 +16,13 @@ void writeFile(int* contentArray, long sizeOfArray, int mode, char* fileName) {
     }
 
     if(filePtr == NULL) {
-        fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+        //fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         return;
     }
     
     for(long i = 0; i < sizeOfArray; i++) {
         if(fputc((char)contentArray[i], filePtr) != contentArray[i]) {
-            fprintf(stderr, "Error: %s\n", strerror(errno));
+            //fprintf(stderr, "Error: %s\n", strerror(errno));
             return;
         } 
     }
