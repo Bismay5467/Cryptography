@@ -2,13 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 
-#include "D:\PROJECT_SEM1\cryptography\C Files\readFile.h"
-#include "D:\PROJECT_SEM1\cryptography\C Files\writeFile.h"
 #include "D:\PROJECT_SEM1\cryptography\C Files\encrypt.h"
 #include "D:\PROJECT_SEM1\cryptography\C Files\decrypt.h"
 
-#define ENCRYPT 0
-#define DECRYPT 1
 
 int main(int argc, char** argv) {
 
