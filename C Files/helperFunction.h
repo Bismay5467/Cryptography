@@ -4,9 +4,9 @@
 #include<math.h>
 
 int* mallocOrDie(long size) {
-    
-    int* memAlloc = (int *)malloc(sizeof(int)*size*size);
-    
+
+    int* memAlloc = (int *)malloc(sizeof(int)*(int)size*(int)size);
+
     if(memAlloc==NULL) {
         printf("\nCouldn't allocate memory\n");
         exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ long calculateDimensions(long sizeOfArray) {
 }
 
 int* transpose(int* Matrix, int dimensions) {
-    
+
     int *transposeMatrix = mallocOrDie(dimensions);
 
     for(long i = 0; i < dimensions; i++) {
@@ -34,7 +34,7 @@ int* transpose(int* Matrix, int dimensions) {
 }
 
 int* xorOperation(int* Matrix, long dimensions, char* key) {
-    
+
     for(long i = 0, k = 0; i < dimensions; i++) {
         for(long j = 0; j < dimensions; j++) {
             Matrix[i*dimensions + j] ^= key[k % strlen(key)];
