@@ -10,12 +10,11 @@
 #define ENCRYPT 0
 
 int *applyKey(int* asciiArray, long sizeOfArray, char* key){
-    
+
     int lengthOfkey = strlen(key);
-    int bias = 127;
 
     for(int i = 0, j = 0; i < sizeOfArray; i++, j++) {
-        asciiArray[i] = 256 - asciiArray[i] - key[j % lengthOfkey] - bias;
+        asciiArray[i] = 256 - asciiArray[i] - key[j % lengthOfkey];
     }
 
     return asciiArray;
@@ -23,79 +22,59 @@ int *applyKey(int* asciiArray, long sizeOfArray, char* key){
 
 int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
 
-    int *matrix = mallocOrDie(dimensions);
+    int *encryptedMatrix = mallocOrDie(dimensions);
 
-    // printf("\n%p\n", encryptedMatrix);
+    long i,k;
 
-    // if(encryptedMatrix == NULL) {
-    //     printf("\nCouldn't allocate memory for matrix conversion\n");
-    //     exit(EXIT_FAILURE);
-    // }
+    for(i = 0, k = 0; i < dimensions*dimensions; i++) {
+        *(encryptedMatrix+i) = *(encryptedArray+k);
+        k++;
+        if(k == sizeOfArray) {
+            break;
+        }
+    }
 
-    // long i,k;
-    
-    // for(i = 0, k = 0; i < dimensions*dimensions; i++) {
-    //     *(encryptedMatrix+i) = *(encryptedArray+k);
-    //     k++;
-    //     if(k == sizeOfArray) {
-    //         break;
-    //     }
-    // }
+    if(i < dimensions*dimensions) {
+        encryptedMatrix[i++] = '^';
+    }
 
-    // if(i < dimensions*dimensions) {
-    //     encryptedMatrix[i++] = '^';
-    // }
+    while(i < dimensions*dimensions) {
+        encryptedMatrix[i++] = (rand() % 93);
+    }
 
-    // while(i < dimensions*dimensions) {
-    //     encryptedMatrix[i++] = (rand() % 93);
-    // }
-
-    for(int ii = 0; ii < dimensions; ii++) {
-        for(int jj = 0; jj < dimensions; jj++) {
-            printf("\nhere\n");
+    for(long i = 0; i < dimensions; i++){
+        for(long j = 0; j < dimensions; j++){
+            printf("|%d||%c|\t", encryptedMatrix[(int)(i*(dimensions) + j)],encryptedMatrix[(int)(i*(dimensions) + j)]);
+            //printf("\nhere\n");
         }
         printf("\n");
     }
-    
 
-    // return encryptedMatrix;
-    return NULL;
+    return encryptedMatrix;
 }
 
-int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension) {    
+int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension) {
 
     int *encryptedArray = applyKey(asciiArray, sizeOfArray, key);
 
     *dimension = calculateDimensions(sizeOfArray);
-
+    
     int *encryptedMatrix = matrixConversion(encryptedArray, sizeOfArray, *dimension);
-
     
+    encryptedMatrix = transpose(encryptedMatrix, *dimension);
+    encryptedMatrix = xorOperation(encryptedMatrix, *dimension, key);
 
-
-
-    // for(int i = 0; i < sizeOfArray; i++) {
-    //     printf("|%d| |%c|\t", encryptedArray[i], encryptedArray[i] );
-    // }
-
-    
-    
-    
-    // encryptedMatrix = transpose(encryptedMatrix, dimensions);
-    // encryptedMatrix = xorOperation(encryptedMatrix, dimensions, key);
-
-    // return encryptedMatrix;
-    return NULL;
+    return encryptedMatrix;
 }
 
 void encrypt(char* sourceFile, char* destinationFile, char* key) {
-    
+
     long sizeOfArray;
     long dimension;
 
-    int* asciiArray = readFile(sourceFile, &sizeOfArray); 
+    int* asciiArray = readFile(sourceFile, &sizeOfArray);
     int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension);
-    //writeFile(encryptedArray, sizeOfArray, ENCRYPT, destinationFile);
+    writeFile(encryptedArray, dimension, ENCRYPT, destinationFile);
 
     free(asciiArray);
     free(encryptedArray);
