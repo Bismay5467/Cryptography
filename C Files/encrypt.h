@@ -24,30 +24,20 @@ int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
 
     int *encryptedMatrix = mallocOrDie(dimensions);
 
-    long i,k;
+    long i = 0L,k = 0L;
 
-    for(i = 0, k = 0; i < dimensions*dimensions; i++) {
+    while(k < sizeOfArray) {
         *(encryptedMatrix+i) = *(encryptedArray+k);
-        k++;
-        if(k == sizeOfArray) {
-            break;
-        }
+        i++, k++;
     }
 
     if(i < dimensions*dimensions) {
+
         encryptedMatrix[i++] = '^';
     }
 
     while(i < dimensions*dimensions) {
         encryptedMatrix[i++] = (rand() % 93);
-    }
-
-    for(long i = 0; i < dimensions; i++){
-        for(long j = 0; j < dimensions; j++){
-            printf("|%d||%c|\t", encryptedMatrix[(int)(i*(dimensions) + j)],encryptedMatrix[(int)(i*(dimensions) + j)]);
-            //printf("\nhere\n");
-        }
-        printf("\n");
     }
 
     return encryptedMatrix;
@@ -58,9 +48,9 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension) {
     int *encryptedArray = applyKey(asciiArray, sizeOfArray, key);
 
     *dimension = calculateDimensions(sizeOfArray);
-    
+
     int *encryptedMatrix = matrixConversion(encryptedArray, sizeOfArray, *dimension);
-    
+
     encryptedMatrix = transpose(encryptedMatrix, *dimension);
     encryptedMatrix = xorOperation(encryptedMatrix, *dimension, key);
 
@@ -74,7 +64,7 @@ void encrypt(char* sourceFile, char* destinationFile, char* key) {
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray);
     int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension);
-    writeFile(encryptedArray, dimension, ENCRYPT, destinationFile);
+    writeFile(encryptedArray, dimension*dimension, ENCRYPT, destinationFile);
 
     free(asciiArray);
     free(encryptedArray);

@@ -20,7 +20,7 @@ long calculateDimensions(long sizeOfArray) {
     return dimensions;
 }
 
-int* transpose(int* Matrix, int dimensions) {
+int* transpose(int* Matrix, long dimensions) {
 
     int *transposeMatrix = mallocOrDie(dimensions);
 

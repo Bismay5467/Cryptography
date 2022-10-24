@@ -3,7 +3,7 @@
 #include<string.h>
 
 int* readFile(char* fileName, long* fileSize) {
-    FILE *filePtr = fopen(fileName, "r");
+    FILE *filePtr = fopen(fileName, "rb");
     
     if(filePtr == NULL) {
         fprintf(stderr, "Error opening file: %s\n", strerror(errno));
