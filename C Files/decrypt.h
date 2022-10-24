@@ -15,7 +15,6 @@ int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
     int flag = 0;
     long posI, posJ;
 
-<<<<<<< HEAD
     for(long i = dimension-1; i >= 0; i--) {
         for(long j = dimension-1; j >= 0; j--) {
             if(matrix[i*dimension+j] == '^') {
@@ -27,15 +26,6 @@ int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
         if(flag == 1) {
             posI = i;
             break;
-=======
-    *dimension = calculateDimensions(sizeOfArray);
-
-    int *decryptedArray = xorOperation(asciiArray, *dimension, key);
-    decryptedArray = transpose(decryptedArray, *dimension);
-    for(long i = 0; i < *dimension; i++){
-        for(long j = 0; j < *dimension; j++){
-            printf("|%d||%c|\t", decryptedArray[i*(*dimension) + j],decryptedArray[i*(*dimension) + j]);
->>>>>>> 21a3931e6fa057bb61410a66dbf25ad0195b7762
         }
     }
 
