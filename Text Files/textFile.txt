@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Agnideepta Chakraborty
 Arkajeet Bera
 Biplaw Kumar Singh
 Bismay Purkayastha
-=======
-BismayGandu
->>>>>>> 21a3931e6fa057bb61410a66dbf25ad0195b7762
