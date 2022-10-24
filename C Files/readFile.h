@@ -32,8 +32,11 @@ int* readFile(char* fileName, long* fileSize) {
             return NULL;
         }
 
-        asciiArray[i++] = fgetc(filePtr);
+        asciiArray[i] = fgetc(filePtr);
+        //printf("%c", asciiArray[i]);
+        i++;
     }
+    printf("%d\n", *fileSize);
 
     fclose(filePtr);
 
