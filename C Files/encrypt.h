@@ -3,9 +3,9 @@
 #include<string.h>
 #include<math.h>
 
-#include "D:\PROJECT_SEM1\cryptography\C Files\readFile.h"
-#include "D:\PROJECT_SEM1\cryptography\C Files\writeFile.h"
-#include "D:\PROJECT_SEM1\cryptography\C Files\helperFunction.h"
+#include "readFile.h"
+#include "writeFile.h"
+#include "helperFunction.h"
 
 #define ENCRYPT 0
 

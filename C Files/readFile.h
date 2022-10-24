@@ -6,7 +6,7 @@ int* readFile(char* fileName, long* fileSize) {
     FILE *filePtr = fopen(fileName, "rb");
     
     if(filePtr == NULL) {
-        fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+        //fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         return NULL;
     }
 
@@ -27,7 +27,7 @@ int* readFile(char* fileName, long* fileSize) {
     while(!feof(filePtr)) {
         
         if(ferror(filePtr)) {
-            fprintf(stderr, "Error: %s\n", strerror(errno));
+            //fprintf(stderr, "Error: %s\n", strerror(errno));
             *fileSize = 0;
             return NULL;
         }
