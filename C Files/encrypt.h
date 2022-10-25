@@ -31,6 +31,13 @@ int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
         i++, k++;
     }
 
+    // for(int i = 0; i < dimensions; i++) {
+    //     for(int j = 0; j < dimensions; j++) {
+    //         printf("%d\t", encryptedArray[i*(dimensions) + j]);
+    //     }
+    //     printf("\n");
+    // }
+
     if(i < dimensions*dimensions) {
 
         encryptedMatrix[i++] = '^';
@@ -51,12 +58,8 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension) {
 
     int *encryptedMatrix = matrixConversion(encryptedArray, sizeOfArray, *dimension);
 
-    for (int i = 0; i < *dimension; i++) {
-        for (int j = 0; j < *dimension; j++) 
-            printf("|%d| |%c| ",asciiArray[i*(*dimension)+j], asciiArray[i*(*dimension)+j]);
-    }
-
     encryptedMatrix = transpose(encryptedMatrix, *dimension);
+
     encryptedMatrix = xorOperation(encryptedMatrix, *dimension, key);
 
     return encryptedMatrix;
@@ -68,7 +71,6 @@ void encrypt(char* sourceFile, char* destinationFile, char* key) {
     long dimension;
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray);
-    
     int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension);
     writeFile(encryptedArray, dimension*dimension, ENCRYPT, destinationFile);
 

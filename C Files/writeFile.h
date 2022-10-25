@@ -21,7 +21,7 @@ void writeFile(int* contentArray, long sizeOfArray, int mode, char* fileName) {
     }
 
     if(filePtr == NULL) {
-        //fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+        fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         return;
     }
     

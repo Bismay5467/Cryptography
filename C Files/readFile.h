@@ -6,8 +6,8 @@ int* readFile(char* fileName, long* fileSize) {
     FILE *filePtr = fopen(fileName, "rb");
     
     if(filePtr == NULL) {
-        //fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-        return NULL;
+        fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
     }
 
     fseek(filePtr, 0, SEEK_END);
@@ -19,7 +19,7 @@ int* readFile(char* fileName, long* fileSize) {
     if(asciiArray == NULL) {
         fprintf(stderr, "Couldn't allocate memory for ascii array");
         *fileSize = 0;
-        return NULL;
+        exit(EXIT_FAILURE);
     }
 
     long i = 0;
@@ -27,16 +27,13 @@ int* readFile(char* fileName, long* fileSize) {
     while(!feof(filePtr)) {
         
         if(ferror(filePtr)) {
-            //fprintf(stderr, "Error: %s\n", strerror(errno));
+            fprintf(stderr, "Error: %s\n", strerror(errno));
             *fileSize = 0;
-            return NULL;
+            exit(EXIT_FAILURE);
         }
 
-        asciiArray[i] = fgetc(filePtr);
-        //printf("%c", asciiArray[i]);
-        i++;
+        asciiArray[i++] = fgetc(filePtr);
     }
-    printf("%d\n", *fileSize);
 
     fclose(filePtr);
 
