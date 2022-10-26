@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     if(argc < 4) {
         printf("\nArguments expected\n");
         return EXIT_FAILURE;
-    } 
+    }
     else if(argc > 4) {
         printf("\nToo many arguments supplied\n");
         return EXIT_FAILURE;
@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     }
     else {
         printf("\nWrong Input\n");
-    } 
+    }
 
     return EXIT_SUCCESS;
 }

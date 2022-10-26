@@ -5,14 +5,16 @@
 
 int* mallocOrDie(long size) {
 
-    int* memAlloc = (int *)malloc(sizeof(int)*size*size);
+    printf("\n%d hi\n", size);
 
-    printf("\n%d\n", size);
+    int* memAlloc = (int *)malloc(sizeof(int)*size*size);
 
     if(memAlloc==NULL) {
         printf("\nCouldn't allocate memory\n");
         exit(EXIT_FAILURE);
     }
+
+    printf("\n%d hi\n", size);
 
     return memAlloc;
 }
