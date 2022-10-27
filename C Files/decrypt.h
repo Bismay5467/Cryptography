@@ -64,11 +64,6 @@ int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension) 
 
     *dimension = calculateDimensions(*sizeOfArray);
 
-    // for (int i = 0; i < *dimension; i++) {
-    //     for (int j = 0; j < *dimension; j++) 
-    //         printf("%c",asciiArray[i*(*dimension)+j]);
-    // }
-
     int *decryptedArray = xorOperation(asciiArray, *dimension, key);
     decryptedArray = transpose(decryptedArray, *dimension);
     int* array = arrayConversion(decryptedArray, *dimension, sizeOfArray);

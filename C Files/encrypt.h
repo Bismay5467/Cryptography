@@ -31,13 +31,6 @@ int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
         i++, k++;
     }
 
-    // for(int i = 0; i < dimensions; i++) {
-    //     for(int j = 0; j < dimensions; j++) {
-    //         printf("%d\t", encryptedArray[i*(dimensions) + j]);
-    //     }
-    //     printf("\n");
-    // }
-
     if(i < dimensions*dimensions) {
 
         encryptedMatrix[i++] = '^';

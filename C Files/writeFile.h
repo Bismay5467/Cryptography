@@ -12,12 +12,12 @@ void writeFile(int* contentArray, long sizeOfArray, int mode, char* fileName) {
     if(mode == ENCRYPT) {
         fprintf(stdout, "\nEncrypting data...\n");
         Sleep(1000);
-        filePtr = fopen(fileName, "w");
+        filePtr = fopen(fileName, "wb");
     }
     else if(mode == DECRYPT) {
         fprintf(stdout, "\nDecrypting data...\n");
         Sleep(1000);
-        filePtr = fopen(fileName, "w");
+        filePtr = fopen(fileName, "wb");
     }
 
     if(filePtr == NULL) {
