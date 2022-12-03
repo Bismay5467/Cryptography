@@ -1,7 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<windows.h>
+#include <errno.h>
+#include<unistd.h>
+
+
 #define ENCRYPT 0
 #define DECRYPT 1
 
@@ -11,12 +14,12 @@ void writeFile(int* contentArray, long sizeOfArray, int mode, char* fileName) {
 
     if(mode == ENCRYPT) {
         fprintf(stdout, "\nEncrypting data...\n");
-        Sleep(1000);
+        sleep(1);
         filePtr = fopen(fileName, "wb");
     }
     else if(mode == DECRYPT) {
         fprintf(stdout, "\nDecrypting data...\n");
-        Sleep(1000);
+        sleep(1);
         filePtr = fopen(fileName, "wb");
     }
 

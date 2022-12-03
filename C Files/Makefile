@@ -4,8 +4,8 @@ compile:
 	gcc encrypt.h -o encrypt
 	gcc writeFile.h -o writeFile
 	gcc decrypt.h -o decrypt
-	gcc masterFile.c -o masterFile
+	gcc masterFile.c -o masterFile -lm
 encipher:
-	./masterfile ../Text\ Files/textFile.txt ../Text\ Files/encrypt.txt ENCRYPT
+	./masterFile ../Text\ Files/textFile.txt ../Text\ Files/encrypt.txt ENCRYPT
 decipher:
-	./masterfile ../Text\ Files/encrypt.txt ../Text\ Files/decrypt.txt DECRYPT
+	./masterFile ../Text\ Files/encrypt.txt ../Text\ Files/decrypt.txt DECRYPT
