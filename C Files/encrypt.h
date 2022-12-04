@@ -21,7 +21,8 @@ int *applyKey1(int* asciiArray, long sizeOfArray, char* key){
 }
 
 int *applyKey2(int* asciiArray, long sizeOfArray, char* key){
-
+    int lengthOfkey = strlen(key);
+    
 }
 
 int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {

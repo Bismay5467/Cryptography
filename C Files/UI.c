@@ -9,36 +9,131 @@ int main(){
     system("gcc writeFile.h -o writeFile");
     system("gcc decrypt.h -o decrypt");
     system("gcc masterFile.c -o masterFile");
-    system("clear");
-
     char choice;
-    printf("(1) Without Substitution\n");
-    printf("(2) Substitution\n");
-    printf("Enter choice of Encryption Technique: ");
-    scanf("%c", &choice);
-    fflush(stdin);
 
-    switch(choice){
-        case '1':
-            system("./masterfile ../Text\\ Files/textFile.txt ../Text\\ Files/encrypt.txt ENCRYPT 1");
-            printf("Wanna Decrypt? : ");
-            scanf("%c", &choice);
-            if(choice == 'Y')
-                system("./masterfile ../Text\\ Files/encrypt.txt ../Text\\ Files/decrypt.txt DECRYPT 1");
-            break;
-        
-        case '2':
-            system("./masterfile ../Text\\ Files/textFile.txt ../Text\\ Files/encrypt.txt ENCRYPT 2");
-            printf("Wanna Decrypt? : ");
-            scanf("%c", &choice);
-            if(choice == 'Y')
-                system("./masterfile ../Text\\ Files/encrypt.txt ../Text\\ Files/decrypt.txt DECRYPT 2");
-            break;
-        default:
-            printf("Invalid Choice!\n");
-            break;
-    }   
+    do{
+        system("clear");
+        printf("\n(1) Encrypt\n");
+        printf("(2) Decrypt\n");
+        printf("(3) Show File\n");
+        printf("(4) Exit\n");
+        printf("\nEnter your choice: ");
+        choice = getchar();
+        fflush(stdin);
 
+        switch(choice){
+            case '1':
+                system("clear");
+                printf("(1) Without Substitution\n");
+                printf("(2) Substitution\n");
+                printf("\nEnter choice for Encryption Technique: ");
+                choice = getchar();
+                fflush(stdin);
+                if(choice == '1'){
+                    system("clear");
+                    system("./masterfile ../Text\\ Files/textFile.txt ../Text\\ Files/encrypt.txt ENCRYPT 1");
+                    printf("\nPress [Enter] to contineu... ");
+                    getchar();
+                    fflush(stdin);
+                }
+                else if(choice == '2'){
+                    system("clear");
+                    system("./masterfile ../Text\\ Files/textFile.txt ../Text\\ Files/encrypt.txt ENCRYPT 2");
+                    printf("\nPress [Enter] to contineu... ");
+                    getchar();
+                    fflush(stdin);
+                }
+                else{
+                    system("clear");
+                    printf("Invalid Choice!!!\n");
+                    printf("\nPress [Enter] to contineu... ");
+                    getchar();
+                    fflush(stdin);
+                }
+                break;
+
+            case '2':
+                system("clear");
+                printf("(1) Without Substitution\n");
+                printf("(2) Substitution\n");
+                printf("\nEnter choice for Decryption Technique: ");
+                choice = getchar();
+                fflush(stdin);
+                if(choice == '1'){
+                    system("clear");
+                    system("./masterfile ../Text\\ Files/encrypt.txt ../Text\\ Files/decrypt.txt DECRYPT 1");
+                    printf("\nPress [Enter] to contineu... ");
+                    getchar();
+                    fflush(stdin);
+                }
+                else if(choice == '2'){
+                    system("clear");
+                    system("./masterfile ../Text\\ Files/encrypt.txt ../Text\\ Files/decrypt.txt DECRYPT 2");
+                    printf("\nPress [Enter] to contineu... ");
+                    getchar();
+                    fflush(stdin);
+                }
+                else{
+                    system("clear");
+                    printf("Invalid Choice!!!\n");
+                    printf("\nPress [Enter] to contineu... ");
+                    getchar();
+                    fflush(stdin);
+                }
+                break;
+
+            case '3':
+                system("clear");
+                printf("(1) Text File\n");
+                printf("(2) Encrypted File\n");
+                printf("(3) Decrypted File\n");
+                printf("\nEnter choice for Display: ");
+                choice = getchar();
+                fflush(stdin);
+                switch(choice){
+                    case '1':
+                        system("clear");
+                        system("cat ../Text\\ Files/textFile.txt");
+                        printf("\n\nPress [Enter] to contineu... ");
+                        getchar();
+                        fflush(stdin);
+                        break;
+                    case '2':
+                        system("clear");
+                        system("cat ../Text\\ Files/encrypt.txt");
+                        printf("\n\nPress [Enter] to contineu... ");
+                        getchar();
+                        fflush(stdin);
+                        break;
+                    case '3':
+                        system("clear");
+                        system("cat ../Text\\ Files/decrypt.txt");
+                        printf("\n\nPress [Enter] to contineu... ");
+                        getchar();
+                        fflush(stdin);
+                        break;
+                    default:
+                        system("clear");
+                        printf("Invalid Choice!!\n");
+                        printf("\n\nPress [Enter] to contineu... ");
+                        getchar();
+                        fflush(stdin);
+                        break;
+                }
+                break;
+            case '4':
+                break;
+            default:
+                system("clear");
+                printf("Invalid Choice!!!\n");
+                printf("\nPress [Enter] to contineu... ");
+                getchar();
+                fflush(stdin);
+                break;
+
+        }
+
+    }while(choice!='4');
 
 
     return EXIT_SUCCESS;
