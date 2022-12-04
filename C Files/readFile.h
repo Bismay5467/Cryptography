@@ -1,12 +1,11 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int* readFile(char* fileName, long* fileSize) {
-    FILE *filePtr = fopen(fileName, "rb");
-    
-    if(filePtr == NULL) {
-        fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+    FILE* filePtr = fopen(fileName, "rb");
+
+    if (filePtr == NULL) {
         exit(EXIT_FAILURE);
     }
 
@@ -15,8 +14,8 @@ int* readFile(char* fileName, long* fileSize) {
     *fileSize = size;
     rewind(filePtr);
 
-    int* asciiArray = (int*)malloc(sizeof(int)*size);
-    if(asciiArray == NULL) {
+    int* asciiArray = (int*)malloc(sizeof(int) * size);
+    if (asciiArray == NULL) {
         fprintf(stderr, "Couldn't allocate memory for ascii array");
         *fileSize = 0;
         exit(EXIT_FAILURE);
@@ -24,10 +23,8 @@ int* readFile(char* fileName, long* fileSize) {
 
     long i = 0;
 
-    while(!feof(filePtr)) {
-        
-        if(ferror(filePtr)) {
-            fprintf(stderr, "Error: %s\n", strerror(errno));
+    while (!feof(filePtr)) {
+        if (ferror(filePtr)) {
             *fileSize = 0;
             exit(EXIT_FAILURE);
         }

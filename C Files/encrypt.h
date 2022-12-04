@@ -9,7 +9,7 @@
 
 #define ENCRYPT 0
 
-int *applyKey(int* asciiArray, long sizeOfArray, char* key){
+int *applyKey1(int* asciiArray, long sizeOfArray, char* key){
 
     int lengthOfkey = strlen(key);
 
@@ -18,6 +18,10 @@ int *applyKey(int* asciiArray, long sizeOfArray, char* key){
     }
 
     return asciiArray;
+}
+
+int *applyKey2(int* asciiArray, long sizeOfArray, char* key){
+
 }
 
 int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
@@ -43,9 +47,18 @@ int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
     return encryptedMatrix;
 }
 
-int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension) {
+int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, char* choice) {
 
-    int *encryptedArray = applyKey(asciiArray, sizeOfArray, key);
+    int *encryptedArray;
+    
+    if(*choice == '1')
+        encryptedArray = applyKey1(asciiArray, sizeOfArray, key);
+    else if(*choice == '2')
+        encryptedArray = applyKey2(asciiArray, sizeOfArray, key);
+    else{
+        printf("INVALID CHOICE!\n");
+        exit(EXIT_FAILURE);
+    }
 
     *dimension = calculateDimensions(sizeOfArray);
 
@@ -58,13 +71,13 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension) {
     return encryptedMatrix;
 }
 
-void encrypt(char* sourceFile, char* destinationFile, char* key) {
+void encryp(char* sourceFile, char* destinationFile, char* choice,  char* key) {
 
     long sizeOfArray;
     long dimension;
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray);
-    int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension);
+    int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension, choice);
     writeFile(encryptedArray, dimension*dimension, ENCRYPT, destinationFile);
 
     free(asciiArray);

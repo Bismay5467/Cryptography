@@ -49,7 +49,7 @@ int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
     return asciiArray;
 }
 
-int* reApplyKey(int* array, long sizeOfArray, char* key) {
+int* reApplyKey1(int* array, long sizeOfArray, char* key) {
 
     long lengthOfkey = strlen(key);
     
@@ -60,26 +60,34 @@ int* reApplyKey(int* array, long sizeOfArray, char* key) {
     return array;
 }
 
-int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension) {
+int* reApplyKey2(int* array, long sizeOfArray, char* key){
+
+}
+
+int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension, char* choice) {
 
     *dimension = calculateDimensions(*sizeOfArray);
 
     int *decryptedArray = xorOperation(asciiArray, *dimension, key);
     decryptedArray = transpose(decryptedArray, *dimension);
     int* array = arrayConversion(decryptedArray, *dimension, sizeOfArray);
-    array = reApplyKey(array, *sizeOfArray, key);
+
+    if(*choice == '1')
+        array = reApplyKey1(array, *sizeOfArray, key);
+    else if(*choice == '2')
+        array = reApplyKey2(array, *sizeOfArray, key);
 
     free(decryptedArray);
     return array;
 }
 
-void decrypt(char* sourceFile, char* destinationFile, char* key) {
+void decrypt(char* sourceFile, char* destinationFile, char* choice, char* key) {
     
     long sizeOfArray;   
     long dimension;
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray); 
-    int* decryptedArray = decryption(asciiArray, &sizeOfArray, key, &dimension);    
+    int* decryptedArray = decryption(asciiArray, &sizeOfArray, key, &dimension, choice);    
     writeFile(decryptedArray, sizeOfArray, DECRYPT, destinationFile);
 
     free(asciiArray);
