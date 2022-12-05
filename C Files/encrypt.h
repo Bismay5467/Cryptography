@@ -8,6 +8,8 @@
 #include "helperFunction.h"
 
 #define ENCRYPT 0
+#define WITHOUT_SUBSTITUTION '1'
+#define SUBSTITUTION '2'
 
 int *applyKey1(int* asciiArray, long sizeOfArray, char* key){
 
@@ -52,10 +54,12 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, c
 
     int *encryptedArray;
     
-    if(*choice == '1')
+    if(*choice == WITHOUT_SUBSTITUTION)
         encryptedArray = applyKey1(asciiArray, sizeOfArray, key);
-    else if(*choice == '2')
+
+    else if(*choice == SUBSTITUTION)
         encryptedArray = applyKey2(asciiArray, sizeOfArray, key);
+        
     else{
         printf("INVALID CHOICE!\n");
         exit(EXIT_FAILURE);

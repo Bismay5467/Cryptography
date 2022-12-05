@@ -10,6 +10,9 @@
 
 #define DECRYPT 1
 
+#define WITHOUT_SUBSTITUTION '1'
+#define SUBSTITUTION '2'
+
 int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
     
     int flag = 0;
@@ -68,9 +71,10 @@ int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension, 
     decryptedArray = transpose(decryptedArray, *dimension);
     int* array = arrayConversion(decryptedArray, *dimension, sizeOfArray);
 
-    if(*choice == '1')
+    if(*choice == WITHOUT_SUBSTITUTION)
         array = reApplyKey1(array, *sizeOfArray, key);
-    else if(*choice == '2')
+
+    else if(*choice == SUBSTITUTION)
         array = reApplyKey2(array, *sizeOfArray, key);
 
     free(decryptedArray);
