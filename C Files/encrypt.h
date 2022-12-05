@@ -27,7 +27,7 @@ int *applyKey2(int* asciiArray, long sizeOfArray, char* key){
 
 int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
 
-    int *encryptedMatrix = mallocOrDie(dimensions);
+    int *encryptedMatrix = mallocOrDie((dimensions)*(dimensions));
 
     long i = 0L,k = 0L;
 
@@ -72,7 +72,7 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, c
     return encryptedMatrix;
 }
 
-void encryp(char* sourceFile, char* destinationFile, char* choice,  char* key) {
+void encrypt(char* sourceFile, char* destinationFile, char* choice,  char* key) {
 
     long sizeOfArray;
     long dimension;

@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     char key[] = "AgnideeptaArkojeetBiplawBismay";
 
     if(!strcasecmp(argv[3], "ENCRYPT")) {
-        encryp(argv[1], argv[2], argv[4], key);
+        encrypt(argv[1], argv[2], argv[4], key);
     }
     else if(!strcasecmp(argv[3], "DECRYPT")) {
         decrypt(argv[1], argv[2], argv[4], key);

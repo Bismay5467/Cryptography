@@ -5,7 +5,7 @@
 
 int* mallocOrDie(long size) {
 
-    int* memAlloc = (int *)malloc(sizeof(int)*size*size);
+    int* memAlloc = (int *)malloc(sizeof(int)*size);
 
     if(memAlloc==NULL) {
         printf("\nCouldn't allocate memory\n");
@@ -22,7 +22,7 @@ long calculateDimensions(long sizeOfArray) {
 
 int* transpose(int* Matrix, long dimensions) {
 
-    int *transposeMatrix = mallocOrDie(dimensions);
+    int *transposeMatrix = mallocOrDie((dimensions)*(dimensions));
 
     for(long i = 0; i < dimensions; i++) {
         for(long j = 0; j < dimensions; j++) {

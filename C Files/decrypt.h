@@ -31,13 +31,9 @@ int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
 
     *sizeOfArray = (posI*dimension+posJ);
     
-    int* asciiArray = (int*)malloc(sizeof(int)*(*sizeOfArray));
-    if(asciiArray == NULL) {
-        printf("\nCouldn't allocate memory\n");
-        exit(EXIT_FAILURE);
-    }
+    int* asciiArray = mallocOrDie((*sizeOfArray)*(*sizeOfArray));
 
-    for(long i = posI, j = posJ, k = *sizeOfArray; i >= 0;) {
+    for(long i = posI, j = posJ, k = *sizeOfArray; i >= 0; ) {
         asciiArray[k--] = matrix[i*dimension+j];
         j--;
         if(j == -1) {
