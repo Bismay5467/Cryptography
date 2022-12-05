@@ -48,7 +48,7 @@ int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
     return asciiArray;
 }
 
-int* reApplyKey1(int* array, long sizeOfArray, char* key) {
+int* reApplyKey(int* array, long sizeOfArray, char* key) {
 
     long lengthOfkey = strlen(key);
     
@@ -59,26 +59,75 @@ int* reApplyKey1(int* array, long sizeOfArray, char* key) {
     return array;
 }
 
-int* reApplyKey2(int* array, long sizeOfArray, char* key){
+int* desubstitution(int* asciiArray, long sizeOfArray){
+    
+    long start = 0L, end = 0L;
+    
+    while(end < sizeOfArray){
+        
+        while(asciiArray[end] != ' ' && asciiArray[end] != ',' && 
+              asciiArray[end] != '?' && asciiArray[end] != ';' &&
+              asciiArray[end] != '/' && asciiArray[end] != '-' && 
+              asciiArray[end] != '.' && asciiArray[end] != '\0' && asciiArray[end] != '!'){
+            end++;
+        }
 
+        int length = end-start;
+        
+        while(start != end){
+            
+            int current = asciiArray[start] - length;
+            
+            if(current < 65){
+                asciiArray[start] = 122+(current-64);
+            }
+            
+            else{
+                asciiArray[start] = current;
+            }
+            
+            ++start;
+            --length;
+        }
+        
+        ++end;
+        start = end;
+    }
+    
+    return asciiArray;
 }
+
 
 int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension, char* choice) {
 
-    *dimension = calculateDimensions(*sizeOfArray);
+    if(*choice == WITHOUT_SUBSTITUTION) {
 
-    int *decryptedArray = xorOperation(asciiArray, *dimension, key);
-    decryptedArray = transpose(decryptedArray, *dimension);
-    int* array = arrayConversion(decryptedArray, *dimension, sizeOfArray);
+        *dimension = calculateDimensions(*sizeOfArray);
 
-    if(*choice == WITHOUT_SUBSTITUTION)
-        array = reApplyKey1(array, *sizeOfArray, key);
+        int *decryptedArray = xorOperation(asciiArray, *dimension, key);
+        
+        decryptedArray = transpose(decryptedArray, *dimension);
+    
+        int* array = arrayConversion(decryptedArray, *dimension, sizeOfArray);
 
-    else if(*choice == SUBSTITUTION)
-        array = reApplyKey2(array, *sizeOfArray, key);
+        array = reApplyKey(array, *sizeOfArray, key);
 
-    free(decryptedArray);
-    return array;
+        free(decryptedArray);
+
+        return array;
+    }
+
+    else if(*choice == SUBSTITUTION) {
+        
+        int* array = reApplyKey(asciiArray, *sizeOfArray, key);
+        array = desubstitution(array, *sizeOfArray);
+        
+        return array;
+    }
+    else {
+        printf("INVALID CHOICE !!!");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void decrypt(char* sourceFile, char* destinationFile, char* choice, char* key) {

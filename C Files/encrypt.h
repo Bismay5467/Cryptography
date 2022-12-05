@@ -11,7 +11,7 @@
 #define WITHOUT_SUBSTITUTION '1'
 #define SUBSTITUTION '2'
 
-int *applyKey1(int* asciiArray, long sizeOfArray, char* key){
+int *applyKey(int* asciiArray, long sizeOfArray, char* key){
 
     int lengthOfkey = strlen(key);
 
@@ -20,11 +20,6 @@ int *applyKey1(int* asciiArray, long sizeOfArray, char* key){
     }
 
     return asciiArray;
-}
-
-int *applyKey2(int* asciiArray, long sizeOfArray, char* key){
-    int lengthOfkey = strlen(key);
-    
 }
 
 int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
@@ -50,30 +45,81 @@ int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
     return encryptedMatrix;
 }
 
+int* substitution(int* asciiArray, long sizeOfArray){
+    
+    long start = 0L, end = 0L;
+
+    while(end < sizeOfArray){
+
+        while(asciiArray[end] != ' ' && asciiArray[end] != ',' && 
+              asciiArray[end] != '?' && asciiArray[end] != ';' &&
+              asciiArray[end] != '/' && asciiArray[end] != '-' && 
+              asciiArray[end] != '.' && asciiArray[end] != '\0' && asciiArray[end] != '!'){
+            end++;
+        }
+
+        int length = end-start;
+
+        while(start!=end){
+            
+            int current = asciiArray[start] + length;
+            
+            if(current > 122){
+                asciiArray[start] = current-122 + 64;
+            }
+            
+            else{
+                asciiArray[start] = current;
+            }
+            
+            ++start;
+            --length;
+        }
+        
+        ++end;
+        start=end;
+    }
+
+    return asciiArray;
+}
+
 int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, char* choice) {
 
     int *encryptedArray;
     
-    if(*choice == WITHOUT_SUBSTITUTION)
-        encryptedArray = applyKey1(asciiArray, sizeOfArray, key);
+    if(*choice == WITHOUT_SUBSTITUTION) {
+        encryptedArray = applyKey(asciiArray, sizeOfArray, key);
 
-    else if(*choice == SUBSTITUTION)
-        encryptedArray = applyKey2(asciiArray, sizeOfArray, key);
+        *dimension = calculateDimensions(sizeOfArray);
+
+        int *encryptedMatrix = matrixConversion(encryptedArray, sizeOfArray, *dimension);
+
+        encryptedMatrix = transpose(encryptedMatrix, *dimension);
+
+        encryptedMatrix = xorOperation(encryptedMatrix, *dimension, key);
+
+        *dimension = (*dimension)*(*dimension);
+
+        return encryptedMatrix;
+    }
+
+    else if(*choice == SUBSTITUTION) {
+
+        encryptedArray = substitution(asciiArray, sizeOfArray);
+        
+        encryptedArray = applyKey(encryptedArray, sizeOfArray, key);
+        
+        *dimension = sizeOfArray;
+
+        return encryptedArray;
+    }
         
     else{
         printf("INVALID CHOICE!\n");
         exit(EXIT_FAILURE);
     }
 
-    *dimension = calculateDimensions(sizeOfArray);
-
-    int *encryptedMatrix = matrixConversion(encryptedArray, sizeOfArray, *dimension);
-
-    encryptedMatrix = transpose(encryptedMatrix, *dimension);
-
-    encryptedMatrix = xorOperation(encryptedMatrix, *dimension, key);
-
-    return encryptedMatrix;
+    
 }
 
 void encrypt(char* sourceFile, char* destinationFile, char* choice,  char* key) {
@@ -83,7 +129,7 @@ void encrypt(char* sourceFile, char* destinationFile, char* choice,  char* key) 
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray);
     int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension, choice);
-    writeFile(encryptedArray, dimension*dimension, ENCRYPT, destinationFile);
+    writeFile(encryptedArray, dimension, ENCRYPT, destinationFile);
 
     free(asciiArray);
     free(encryptedArray);
