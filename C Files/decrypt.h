@@ -11,7 +11,7 @@
 #define DECRYPT 1
 
 #define WITHOUT_SUBSTITUTION '1'
-#define SUBSTITUTION '2'
+/* #define SUBSTITUTION '2' */
 
 int* arrayConversion(int* matrix, long dimension, long* sizeOfArray) {
     
@@ -59,7 +59,7 @@ int* reApplyKey(int* array, long sizeOfArray, char* key) {
     return array;
 }
 
-int* desubstitution(int* asciiArray, long sizeOfArray){
+/* int* desubstitution(int* asciiArray, long sizeOfArray){
     
     long start = 0L, end = 0L;
     
@@ -96,7 +96,7 @@ int* desubstitution(int* asciiArray, long sizeOfArray){
     
     return asciiArray;
 }
-
+ */
 
 int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension, char* choice) {
 
@@ -117,13 +117,13 @@ int* decryption(int* asciiArray, long *sizeOfArray, char* key, long* dimension, 
         return array;
     }
 
-    else if(*choice == SUBSTITUTION) {
+    /* else if(*choice == SUBSTITUTION) {
         
         int* array = reApplyKey(asciiArray, *sizeOfArray, key);
         array = desubstitution(array, *sizeOfArray);
         
         return array;
-    }
+    } */
     else {
         printf("INVALID CHOICE !!!");
         exit(EXIT_FAILURE);
@@ -136,7 +136,8 @@ void decrypt(char* sourceFile, char* destinationFile, char* choice, char* key) {
     long dimension;
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray); 
-    int* decryptedArray = decryption(asciiArray, &sizeOfArray, key, &dimension, choice);    
+    printf("Running code..."); 
+    int* decryptedArray = decryption(asciiArray, &sizeOfArray, key, &dimension, choice);   
     writeFile(decryptedArray, sizeOfArray, DECRYPT, destinationFile);
 
     free(asciiArray);
