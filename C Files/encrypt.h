@@ -9,7 +9,7 @@
 
 #define ENCRYPT 0
 #define WITHOUT_SUBSTITUTION '1'
-#define SUBSTITUTION '2'
+/* #define SUBSTITUTION '2' */
 
 int *applyKey(int* asciiArray, long sizeOfArray, char* key){
 
@@ -45,7 +45,7 @@ int *matrixConversion(int *encryptedArray, long sizeOfArray, long dimensions) {
     return encryptedMatrix;
 }
 
-int* substitution(int* asciiArray, long sizeOfArray){
+/* int* substitution(int* asciiArray, long sizeOfArray){
     
     long start = 0L, end = 0L;
 
@@ -81,7 +81,7 @@ int* substitution(int* asciiArray, long sizeOfArray){
     }
 
     return asciiArray;
-}
+} */
 
 int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, char* choice) {
 
@@ -103,7 +103,7 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, c
         return encryptedMatrix;
     }
 
-    else if(*choice == SUBSTITUTION) {
+    /* else if(*choice == SUBSTITUTION) {
 
         encryptedArray = substitution(asciiArray, sizeOfArray);
         
@@ -112,7 +112,7 @@ int* encryption(int* asciiArray, long sizeOfArray, char* key, long* dimension, c
         *dimension = sizeOfArray;
 
         return encryptedArray;
-    }
+    } */
         
     else{
         printf("INVALID CHOICE!\n");
@@ -128,6 +128,7 @@ void encrypt(char* sourceFile, char* destinationFile, char* choice,  char* key) 
     long dimension;
 
     int* asciiArray = readFile(sourceFile, &sizeOfArray);
+    printf("Executing Code...");
     int* encryptedArray = encryption(asciiArray, sizeOfArray, key, &dimension, choice);
     writeFile(encryptedArray, dimension, ENCRYPT, destinationFile);
 
