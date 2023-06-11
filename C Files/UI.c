@@ -32,7 +32,7 @@ int main(){
                 getchar();
                 if(choice == '1'){
                     system("cls");
-                    system("masterFile ../\"Text Files\"/textFile.txt ../\"Text Files\"/encrypt.txt ENCRYPT 1");
+                    system("masterFile textFile.txt encrypt.txt ENCRYPT 1");
                     printf("\nPress [Enter] to contineu... ");
                     getchar();
                     getchar();
@@ -62,7 +62,7 @@ int main(){
                 getchar();
                 if(choice == '1'){
                     system("cls");
-                    system("masterFile ../\"Text Files\"/encrypt.txt ../\"Text Files\"/decrypt.txt DECRYPT 1");
+                    system("masterFile encrypt.txt decrypt.txt DECRYPT 1");
                     printf("\nPress [Enter] to contineu... ");
                     getchar();
                     getchar();
@@ -94,21 +94,21 @@ int main(){
                 switch(choice){
                     case '1':
                         system("cls");
-                        system("type ..\\\"Text Files\"\\textFile.txt");
+                        system("type textFile.txt");
                         printf("\n\nPress [Enter] to contineu... ");
                         getchar();
                         getchar();
                         break;
                     case '2':
                         system("cls");
-                        system("type ..\\\"Text Files\"\\encrypt.txt");
+                        system("type encrypt.txt");
                         printf("\n\nPress [Enter] to contineu... ");
                         getchar();
                         getchar();
                         break;
                     case '3':
                         system("cls");
-                        system("type ..\\\"Text Files\"\\decrypt.txt");
+                        system("type decrypt.txt");
                         printf("\n\nPress [Enter] to contineu... ");
                         getchar();
                         getchar();
