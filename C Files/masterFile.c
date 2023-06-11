@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
-    char key[] = "AgnideeptaArkojeetBiplawBismay";
+    char key[] = "SourikBanerjee";
 
     if(!strcasecmp(argv[3], "ENCRYPT")) {
         encrypt(argv[1], argv[2], argv[4], key);
